@@ -1,20 +1,7 @@
-//you have all of this on github at f/Javascript_Misc/maze_messing_1.9.22 5.18.22 
-//NO I DON'T THINK THAT THE ABOVE IS CORRECT THAT'S SOMETHING ELSE
-//continuing on with figuring out the 24 rotations...
-//IT SEEMS THAT YOU HAVE EVERYTHING FIXED WITH THE 24 ROTATIONS AT THE MOMENT 
-//YOU HAD BEEN THINKING ABOUT i AS Y (ROWS) AND j AS X (COLS)
-//SO NEEDED TO SWITCH ALL OF THAT THINKING TO i AS X (COLS) AND j AS Y (ROWS)
-//I think that you have all of the 24 perspectives and translations and everything working
-//level of certainty that everything makes sense though is pretty low until you try to thoroughly test it
-//but tentative yay! 5/21/22
+//deployed at https://nathanfenoglio.github.io/multi_dimensional_mazes_with_3D_rotations/
 
 //global variables
 //var cols, rows; //comes from maze_info.js now
-//var w = 40; //width of cell
-//var w = 80; //width of cell
-//var w = 160; //width of cell
-//var w = 266; //width of cell
-//var w = 300; //width of cell
 var grid = []; //all of the cells in the original perspective of the entire 3D maze, size is cols * rows * innieouties
 var orig_persp_90 = []; //**original facing perspective, then top of head to the original right
 var orig_persp_180 = []; //**original facing perspective, then top of head to the original bottom
@@ -50,7 +37,6 @@ var all_maze_perspectives = [];
 var current_maze_perspective = 0;
 var current_maze_plane = 0; 
 
-//var sleep_time = 500; //I DON'T THINK YOU'RE USING THIS RIGHT NOW IN THE SET INTERVAL FUNCTION//time in milliseconds to wait to show next maze plane after maze is constructed
 var start; //signifying starting up maze, start up whatev, maybe tutorial about how to play etc., set true/false in setup() function 
 var letsgetitstarted;
 let start_index = 1;
@@ -76,10 +62,10 @@ function setup() {
 	console.log("innieouties: " + innieouties);
 
 	//createCanvas(windowWidth, windowHeight);
-	createCanvas(800, 800);
+	//createCanvas(800, 800);
+	createCanvas(700, 700);
 	w = width / Math.max(orig_cols, orig_rows, orig_innieouties); //width of cell
 
-	//createCanvas(900, 900);
 	//I guess that width and height are already known as keywords for the canvas sizes
 	//cols = floor(width / w); 
 	//rows = floor(height / w);
@@ -143,8 +129,6 @@ function setup() {
     //}
     //all original orientations are top, right, bottom, left, out, in
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 1
 	console.log("PERSPECTIVE 1");
 	//**original facing perspective, then top of head to the original right
@@ -154,7 +138,6 @@ function setup() {
 	for(let i = 0; i < orig_cols; i++){
 		for(let j = 0; j < orig_rows; j++){
 			for(let k = 0; k < orig_innieouties; k++){
-				//SWITCHING CONCEPT OF i AND j
 				let cell = new Cell(j, orig_cols - i - 1, k);
 				let cell_num = index_take_2(j, orig_cols - i - 1, k, particular_num_cols, particular_num_rows, particular_num_innieouties);
 
@@ -179,8 +162,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(orig_persp_90);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 2
 	console.log("PERSPECTIVE 2");
 	//**original facing perspective, then top of head to the original bottom
@@ -214,8 +195,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(orig_persp_180);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 3
 	console.log("PERSPECTIVE 3");
     //**original facing perspective, then top of head to the original left
@@ -282,8 +261,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_to_left_grid);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 5
 	console.log("PERSPECTIVE 5");
     //**turn head to the left, then top of head to the original back
@@ -318,8 +295,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_to_left_grid_90);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 6
 	console.log("PERSPECTIVE 6");
     //**turn head to the left, then top of head to the original bottom
@@ -354,8 +329,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_to_left_grid_180);
 
-	//YOU HAVE BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 7
 	console.log("PERSPECTIVE 7");
     //**turn head to the left, then top of head to the original front
@@ -424,8 +397,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_to_right_grid);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 9
 	console.log("PERSPECTIVE 9");
     //**turn head to the right, then top of head to the original front
@@ -460,8 +431,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_to_right_grid_90);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 10
 	console.log("PERSPECTIVE 10");
     //**turn head to the right, then top of head to the original bottom
@@ -495,8 +464,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_to_right_grid_180);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 11
 	console.log("PERSPECTIVE 11");
     //**turn head to the right, then top of head to the original back
@@ -565,8 +532,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_up_grid);
 	
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 13
 	console.log("PERSPECTIVE 13");
 	//all original orientations are top, right, bottom, left, out, in
@@ -601,8 +566,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_up_grid_90);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 14
 	console.log("PERSPECTIVE 14");
     //**turn head up, then top of head to the original back
@@ -637,8 +600,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_up_grid_180);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 15
 	console.log("PERSPECTIVE 15");
     //**turn head up, then top of head to the original left
@@ -707,8 +668,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_down_grid);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 17
 	console.log("PERSPECTIVE 17");
     //**turn head down, then top of head to the original right
@@ -743,8 +702,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_down_grid_90);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 18
 	console.log("PERSPECTIVE 18");
     //**turn head down, then top of head to the original front
@@ -779,8 +736,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_down_grid_180);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 19
 	console.log("PERSPECTIVE 19");
     //**turn head down, then top of head to the original left
@@ -849,8 +804,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_backward_grid);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 21
 	console.log("PERSPECTIVE 21");
     //**turn head back, then top of head to the original left
@@ -886,8 +839,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_backward_grid_90);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 22
 	console.log("PERSPECTIVE 22");
     //**turn head back, then top of head to the original bottom
@@ -922,8 +873,6 @@ function setup() {
 	//add maze to all_maze_perspectives array
 	all_maze_perspectives.push(turn_head_backward_grid_180);
 
-	//YOU HAD BEEN THINKING ABOUT i AS ROWS WHEN YOU SHOULD BE THINKING ABOUT i AS COLS
-	//AND j AS COLS WHEN YOU SHOULD BE THINKING OF j AS ROWS
 	//PERSPECTIVE 23
 	console.log("PERSPECTIVE 23");
     //**turn head back, then top of head to the original right
