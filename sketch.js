@@ -62,7 +62,8 @@ function setup() {
 	console.log("innieouties: " + innieouties);
 
 	//createCanvas(windowWidth, windowHeight);
-	createCanvas(800, 800);
+	//createCanvas(800, 800);
+	createCanvas(700, 700);
 	w = width / Math.max(orig_cols, orig_rows, orig_innieouties); //width of cell
 
 	//I guess that width and height are already known as keywords for the canvas sizes
