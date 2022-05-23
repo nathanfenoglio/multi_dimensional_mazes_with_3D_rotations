@@ -39,9 +39,6 @@ var current_maze_plane = 0;
 
 var start; //signifying starting up maze, start up whatev, maybe tutorial about how to play etc., set true/false in setup() function 
 var letsgetitstarted;
-let start_index = 1;
-let goal_index = 30;
-let current_goal_index = goal_index; //for changing goal index when drawing the different perspectives
 
 //you may be circling back around creating too many variables to hold this and that
 //at least one set is needed to hold a current perspectives # of cols, rows, innieouties
@@ -52,6 +49,11 @@ var orig_cols = cols;
 var orig_rows = rows;
 var orig_innieouties = innieouties;
 var w; //width of cell
+//generate random start_index
+let start_index = Math.floor(Math.random() * orig_cols * orig_rows * orig_innieouties);
+//generate random goal_index
+let goal_index = Math.floor(Math.random() * orig_cols * orig_rows * orig_innieouties);
+let current_goal_index = goal_index; //for changing goal index when drawing the different perspectives
 
 function setup() {
 	//get all of the maze info from maze_info.js or whichever file in directory mazes and specified in index.js
@@ -60,9 +62,13 @@ function setup() {
 	console.log("cols: " + cols);
 	console.log("rows: " + rows);
 	console.log("innieouties: " + innieouties);
+	console.log("start_index: " + start_index);
+	console.log("start_index coordinates: " + coordinates_from_index(start_index, orig_cols, orig_rows, orig_innieouties));
+	console.log("goal_index: " + goal_index);
+	console.log("goal_index coordinates: " + coordinates_from_index(goal_index, orig_cols, orig_rows, orig_innieouties));
+	
 
 	//createCanvas(windowWidth, windowHeight);
-	//createCanvas(800, 800);
 	createCanvas(650, 650);
 	w = width / Math.max(orig_cols, orig_rows, orig_innieouties); //width of cell
 
@@ -917,6 +923,7 @@ function setup() {
 	//draw each maze plane for player to see
 	//letsgetitstarted = setInterval(show_one_maze_plane, 5000); //uncomment to show all maze perspectives before starting	
 	letsgetitstarted = setInterval(show_one_maze_plane, 100); //uncomment to show all maze perspectives before starting	
+	current_maze_plane = Math.floor(start_index / (orig_cols * orig_rows));
 }
 
 function draw() {
