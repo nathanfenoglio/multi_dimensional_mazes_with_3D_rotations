@@ -1,72 +1,72 @@
 //deployed at https://nathanfenoglio.github.io/multi_dimensional_mazes_with_3D_rotations/
 
 //global variables
-var grid = []; //all of the cells in the original perspective of the entire 3D maze, size is cols * rows * innieouties
-var orig_persp_90 = []; //**original facing perspective, then top of head to the original right
-var orig_persp_180 = []; //**original facing perspective, then top of head to the original bottom
-var orig_persp_270 = []; //**original facing perspective, then top of head to the original left
+let grid = []; //all of the cells in the original perspective of the entire 3D maze, size is cols * rows * innieouties
+let orig_persp_90 = []; //**original facing perspective, then top of head to the original right
+let orig_persp_180 = []; //**original facing perspective, then top of head to the original bottom
+let orig_persp_270 = []; //**original facing perspective, then top of head to the original left
 
-var turn_head_to_left_grid = []; //**turn head to the left** so like stepping to the right of the cube and facing the cube thing from that direction
-var turn_head_to_left_grid_90 = []; //**turn head to the left, then top of head to the original back
-var turn_head_to_left_grid_180 = []; //**turn head to the left, then top of head to the original bottom
-var turn_head_to_left_grid_270 = []; //**turn head to the left, then top of head to the original front
+let turn_head_to_left_grid = []; //**turn head to the left** so like stepping to the right of the cube and facing the cube thing from that direction
+let turn_head_to_left_grid_90 = []; //**turn head to the left, then top of head to the original back
+let turn_head_to_left_grid_180 = []; //**turn head to the left, then top of head to the original bottom
+let turn_head_to_left_grid_270 = []; //**turn head to the left, then top of head to the original front
 
-var turn_head_to_right_grid = []; //**turn head to the right** so like stepping to the left of the original cube and facing it in that direction
-var turn_head_to_right_grid_90 = []; //**turn head to the right, then top of head to the original front
-var turn_head_to_right_grid_180 = []; //**turn head to the right, then top of head to the original bottom
-var turn_head_to_right_grid_270 = []; //**turn head to the right, then top of head to the original back
+let turn_head_to_right_grid = []; //**turn head to the right** so like stepping to the left of the original cube and facing it in that direction
+let turn_head_to_right_grid_90 = []; //**turn head to the right, then top of head to the original front
+let turn_head_to_right_grid_180 = []; //**turn head to the right, then top of head to the original bottom
+let turn_head_to_right_grid_270 = []; //**turn head to the right, then top of head to the original back
 
-var turn_head_up_grid = []; //**turn head up** so like laying down on the ground underneath cube thing with head towards the front of the original
-var turn_head_up_grid_90 = []; //**turn head up, then top of head to the original right
-var turn_head_up_grid_180 = []; //**turn head up, then top of head to the original back
-var turn_head_up_grid_270 = []; //**turn head up, then top of head to the original left
+let turn_head_up_grid = []; //**turn head up** so like laying down on the ground underneath cube thing with head towards the front of the original
+let turn_head_up_grid_90 = []; //**turn head up, then top of head to the original right
+let turn_head_up_grid_180 = []; //**turn head up, then top of head to the original back
+let turn_head_up_grid_270 = []; //**turn head up, then top of head to the original left
 
-var turn_head_down_grid = []; //**turn head down** so like climbing on top of the cube thing and looking down with your head towards the back of the original
-var turn_head_down_grid_90 = []; //**turn head down, then top of head to the original right
-var turn_head_down_grid_180 = []; //**turn head down, then top of head to the original front
-var turn_head_down_grid_270 = []; //**turn head down, then top of head to the original left
+let turn_head_down_grid = []; //**turn head down** so like climbing on top of the cube thing and looking down with your head towards the back of the original
+let turn_head_down_grid_90 = []; //**turn head down, then top of head to the original right
+let turn_head_down_grid_180 = []; //**turn head down, then top of head to the original front
+let turn_head_down_grid_270 = []; //**turn head down, then top of head to the original left
 
-var turn_head_backward_grid = []; //**turn head back** like walking around the cube thing and facing it from the back with your head toward the top
-var turn_head_backward_grid_90 = []; //**turn head back, then top of head to the original left
-var turn_head_backward_grid_180 = []; //**turn head back, then top of head to the original bottom
-var turn_head_backward_grid_270 = []; //**turn head back, then top of head to the original right
+let turn_head_backward_grid = []; //**turn head back** like walking around the cube thing and facing it from the back with your head toward the top
+let turn_head_backward_grid_90 = []; //**turn head back, then top of head to the original left
+let turn_head_backward_grid_180 = []; //**turn head back, then top of head to the original bottom
+let turn_head_backward_grid_270 = []; //**turn head back, then top of head to the original right
 
 
-var all_maze_perspectives = [];
-var current_maze_perspective = 0;
-var current_maze_plane = 0; 
+let all_maze_perspectives = [];
+let current_maze_perspective = 0;
+let current_maze_plane = 0; 
 
-var start; //signifying starting up maze, start up whatev, maybe tutorial about how to play etc., set true/false in setup() function 
-var done_with_getting_user_input_from_boxes = false;
-var letsgetitstarted;
-var finished_building_mazes = false;
-var the_sequence = []; //just saving the sequence for reference as the maze is constructed
-var stack = []; //used for backtracking when a dead end is encountered during maze generation process
-var current; //current cell that the algorithm is currently at for maze generation process
-var current_index;
-var current_cell;
+let start; //signifying starting up maze, start up whatev, maybe tutorial about how to play etc., set true/false in setup() function 
+let done_with_getting_user_input_from_boxes = false;
+let letsgetitstarted;
+let finished_building_mazes = false;
+let the_sequence = []; //just saving the sequence for reference as the maze is constructed
+let stack = []; //used for backtracking when a dead end is encountered during maze generation process
+let current; //current cell that the algorithm is currently at for maze generation process
+let current_index;
+let current_cell;
 
 //current perspectives # of cols, rows, innieouties
-var particular_num_cols = -1;
-var particular_num_rows = -1;
-var particular_num_innieouties = -1;
+let particular_num_cols = -1;
+let particular_num_rows = -1;
+let particular_num_innieouties = -1;
 
 //option to take user input for # of cols, rows, innieouties or you could hardcode
 //or you could get the input from a file of the format that you have in the ./mazes directory
-var maze_info_from_file = false; //option to get the maze info from file instead of manually entered or taken from user input
+let maze_info_from_file = false; //option to get the maze info from file instead of manually entered or taken from user input
 
-var user_input_x_dim = 0;
-var user_input_y_dim = 0;
-var user_input_z_dim = 0;
+let user_input_x_dim = 0;
+let user_input_y_dim = 0;
+let user_input_z_dim = 0;
 
-var orig_cols;
-var orig_rows;
-var orig_innieouties;
+let orig_cols;
+let orig_rows;
+let orig_innieouties;
 
-var w; //width of cell
-var start_index;
-var goal_index;
-var current_goal_index;
+let w; //width of cell
+let start_index;
+let goal_index;
+let current_goal_index;
 
 if(maze_info_from_file){
 	orig_cols = cols;
@@ -900,7 +900,10 @@ function build_all_maze_perspectives(){
 }
 
 function setup() {
-	createCanvas(650, 650);
+	let canvas = createCanvas(650, 650);
+	let trans_canv_rt_amt = 50;
+	let trans_canv_lt_amt = 0;
+	canvas.position(trans_canv_rt_amt, trans_canv_lt_amt); //move canvas to the right
 	background(51);
 	
 	//3 boxes, 1 for each dimension input by user
@@ -910,22 +913,22 @@ function setup() {
 		let middle_pos_y = 20;
 
 		user_input_x_dim = createInput();
-		user_input_x_dim.position(middle_pos_x, middle_pos_y + 15);
+		user_input_x_dim.position(middle_pos_x + trans_canv_rt_amt, middle_pos_y + 15 + trans_canv_lt_amt);
 		user_input_x_dim.style('background-color', 'magenta');
 		user_input_x_dim.size(50, 20);
 
 		user_input_y_dim = createInput();
-		user_input_y_dim.position(middle_pos_x, middle_pos_y + 45);
+		user_input_y_dim.position(middle_pos_x + trans_canv_rt_amt, middle_pos_y + 45 + trans_canv_lt_amt);
 		user_input_y_dim.style('background-color', 'magenta');
 		user_input_y_dim.size(50, 20);
 
 		user_input_z_dim = createInput();
-		user_input_z_dim.position(middle_pos_x, middle_pos_y + 75);
+		user_input_z_dim.position(middle_pos_x + trans_canv_rt_amt, middle_pos_y + 75 + trans_canv_lt_amt);
 		user_input_z_dim.style('background-color', 'magenta');
 		user_input_z_dim.size(50, 20);
 
 		button = createButton("GENERATE MAZE");
-		button.position(90, middle_pos_y + 110);
+		button.position(90 + trans_canv_rt_amt, middle_pos_y + 110 + trans_canv_lt_amt);
 		button.size(400, 100);
 		button.style('background-color', color(0, 255, 0));
 		button.style('font-size', '40px');
@@ -992,10 +995,10 @@ function draw() {
 }
 
 //show all perspectives and planes of each perspective to player before starting game play
-var global_maze_plane_counter = 0;
-var global_perspective_counter = 0;
-var global_cell_index_counter = 0;
-var num_tot_possible_rotations = 24;
+let global_maze_plane_counter = 0;
+let global_perspective_counter = 0;
+let global_cell_index_counter = 0;
+let num_tot_possible_rotations = 24;
 function show_one_maze_plane(){
 	set_particular_num_cols_rows_innieouties(global_perspective_counter);	
 	let num_cells_in_this_particular_plane = particular_num_cols * particular_num_rows;
