@@ -902,7 +902,7 @@ function build_all_maze_perspectives(){
 function setup() {
 	let canvas = createCanvas(650, 650);
 	let trans_canv_rt_amt = 50;
-	let trans_canv_lt_amt = 0;
+	let trans_canv_lt_amt = 10;
 	canvas.position(trans_canv_rt_amt, trans_canv_lt_amt); //move canvas to the right
 	background(51);
 	
