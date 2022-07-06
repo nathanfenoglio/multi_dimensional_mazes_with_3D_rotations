@@ -68,6 +68,8 @@ let start_index;
 let goal_index;
 let current_goal_index;
 
+let solved_it = false; //true if player has reached goal cell
+
 if(maze_info_from_file){
 	orig_cols = cols;
 	orig_rows = rows;
@@ -941,6 +943,18 @@ function setup() {
 	}
 }
 
+function goal_cell_routine(){
+	clear_goal_cell_routine_timeout();
+	current_index = -1;
+	window.alert("GOOOOOOAAAAAALLLLLLLL!!!!!!\nYOU SOLVED THE MAZE\nPLEASE PLAY AGAIN");
+	solved_it = false;
+	location.reload(); //refresh the page to display menu and allow player to input new dimensions for new maze generation		
+}
+
+function clear_goal_cell_routine_timeout(){
+	clearTimeout(goal_cell_routine_timeout);
+}
+
 function draw() {
 	if(finished_building_mazes){
 		if(!start){ //if not start intro sequence where you are showing all of the possible perspectives and planes
@@ -952,12 +966,18 @@ function draw() {
 			for(let i = (current_maze_plane * num_cells_in_this_particular_plane); i < ((current_maze_plane + 1) * num_cells_in_this_particular_plane); i++){
 				all_maze_perspectives[current_maze_perspective][i].show();
 			}	
+
+			//check if player has reached goal cell
+			if(current_index == goal_index && !solved_it){
+				goal_cell_routine_timeout = setTimeout(goal_cell_routine, 500);
+				solved_it = true;
+			}
 		}
+		
 	}
 	else{ //display game instructions and input boxes for player to specify dimensions of maze to generate
 		let middle_pos_y = 25;
 		let pixels_from_left = 100;
-
 		textSize(24);
 		fill(255, 128, 0);
 		text("# of cells in left/right direction", pixels_from_left, middle_pos_y + 30);
@@ -990,7 +1010,8 @@ function draw() {
 		fill(color(255, 128, 0));
 		text("Orange Cell - can go in/out", pixels_from_left - 20 + 250, middle_pos_y + 580);
 		fill('magenta');
-		text("Pink Cell - no in/out", pixels_from_left - 20 + 250, middle_pos_y + 610);		
+		text("Pink Cell - no in/out", pixels_from_left - 20 + 250, middle_pos_y + 610);	
+		
 	}	
 }
 
@@ -1237,6 +1258,9 @@ function keyPressed() {
 	//don't pay attention to key if start routine is still running 
 	//or needing user input for dimensions of maze from input boxes
 	if(start || !done_with_getting_user_input_from_boxes){ 
+		if(keyCode === ENTER){
+			log_user_input();
+		}
 		return;
 	}
 	//NEED TO CHECK ALL SORTS OF THINGS...
@@ -1608,11 +1632,12 @@ function keyPressed() {
 		let cell_index_in_new_perspective = (new_perspective_maze_plane * particular_num_cols * particular_num_rows) + (current_index_coordinates[2] * particular_num_cols) + current_index_coordinates[0];
 		//do the same thing with the goal index
 		let goal_index_in_new_perspective = (new_goal_plane * particular_num_cols * particular_num_rows) + (goal_index_coordinates[2] * particular_num_cols) + goal_index_coordinates[0];
-
+		
 		current_maze_plane = new_perspective_maze_plane;
 		current_index = cell_index_in_new_perspective;
 		current_cell = all_maze_perspectives[current_maze_perspective][current_index];	
 		goal_index = goal_index_in_new_perspective;
+
 	}
 	
 	if(keyCode === 83){ //key s - turn head down
@@ -1715,12 +1740,13 @@ function keyPressed() {
 		let cell_index_in_new_perspective = (new_perspective_maze_plane * particular_num_cols * particular_num_rows) + ((particular_num_rows - current_index_coordinates[2] - 1) * particular_num_cols) + current_index_coordinates[0];
 		//do the same thing with the goal index
 		let goal_index_in_new_perspective = (new_goal_plane * particular_num_cols * particular_num_rows) + ((particular_num_rows - goal_index_coordinates[2] - 1) * particular_num_cols) + goal_index_coordinates[0];
-
+		
 		current_maze_plane = new_perspective_maze_plane;
 		current_index = cell_index_in_new_perspective;
 		current_cell = all_maze_perspectives[current_maze_perspective][current_index];	
 		goal_index = goal_index_in_new_perspective;
 	}
+
 }
 
 //modified index function to also take in the current perspectives
