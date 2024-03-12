@@ -48,3 +48,6 @@ Please feel free to solve some mazes
 
 <https://nathanfenoglio.github.io/multi_dimensional_mazes_with_3D_rotations/>
 
+![alt text](https://github.com/nathanfenoglio/multi_dimensional_mazes_with_3D_rotations/blob/gh-pages/Picture1.png)
+
+![alt text](https://github.com/nathanfenoglio/multi_dimensional_mazes_with_3D_rotations/blob/gh-pages/Picture2.png)
