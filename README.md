@@ -48,7 +48,3 @@ Please feel free to solve some mazes
 
 <https://nathanfenoglio.github.io/multi_dimensional_mazes_with_3D_rotations/>
 
-![](media/image1.png){width="6.5in" height="6.581944444444445in"}
-
-![A screenshot of a game Description automatically
-generated](media/image2.png){width="6.5in" height="6.520138888888889in"}
