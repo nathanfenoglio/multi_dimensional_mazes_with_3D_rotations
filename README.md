@@ -1,4 +1,4 @@
-**Multidimensional Mazes With 3D Rotations**
+# Multidimensional Mazes With 3D Rotations
 
 Javascript web app using p5.js library that generates a
 
