@@ -12,7 +12,7 @@ right, in, out)
 
 to change perspective of player\'s approach to same maze
 
-Keyboard Controls:
+## Keyboard Controls:
 
 UP ARROW - up
 
@@ -34,7 +34,7 @@ a - rotate perspective left
 
 d - rotate perspective right
 
-Cells\' Color Codes:
+## Cells\' Color Codes:
 
 Purple Cell - can go in
 
