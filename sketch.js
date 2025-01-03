@@ -902,40 +902,47 @@ function build_all_maze_perspectives(){
 }
 
 function setup() {
-	let canvas = createCanvas(650, 650);
-	let trans_canv_rt_amt = 50;
-	let trans_canv_lt_amt = 10;
-	canvas.position(trans_canv_rt_amt, trans_canv_lt_amt); //move canvas to the right
-	background(51);
-	
-	//3 boxes, 1 for each dimension input by user
-	//and a generate maze button
-	if(!maze_info_from_file){
-		let middle_pos_x = 430;
-		let middle_pos_y = 20;
+  let canvas = createCanvas(650, 650);
+  //container is the id of the div element in index.html 
+  //and is within the body which uses flexbox to center the canvas on the screen
+  canvas.parent('container');
+  canvas.style('display', 'block');
+  canvas.style('margin', 'auto');
+  background(51);
 
-		user_input_x_dim = createInput();
-		user_input_x_dim.position(middle_pos_x + trans_canv_rt_amt, middle_pos_y + 15 + trans_canv_lt_amt);
-		user_input_x_dim.style('background-color', 'magenta');
-		user_input_x_dim.size(50, 20);
+  //calculate center position of the canvas
+  let canvasX = (windowWidth - width) / 2;
+  let canvasY = (windowHeight - height) / 2;
 
-		user_input_y_dim = createInput();
-		user_input_y_dim.position(middle_pos_x + trans_canv_rt_amt, middle_pos_y + 45 + trans_canv_lt_amt);
-		user_input_y_dim.style('background-color', 'magenta');
-		user_input_y_dim.size(50, 20);
+  //offset for input elements inside the canvas
+  let inputOffsetY = canvasY + 45; 
+  let inputOffsetX = canvasX + 430;
 
-		user_input_z_dim = createInput();
-		user_input_z_dim.position(middle_pos_x + trans_canv_rt_amt, middle_pos_y + 75 + trans_canv_lt_amt);
-		user_input_z_dim.style('background-color', 'magenta');
-		user_input_z_dim.size(50, 20);
+  if (!maze_info_from_file) {
+    //maze dimensions x, y, z input fields
+    user_input_x_dim = createInput();
+    user_input_x_dim.position(inputOffsetX, inputOffsetY + 15 + 30);
+    user_input_x_dim.style('background-color', 'magenta');
+    user_input_x_dim.size(50, 20);
 
-		button = createButton("GENERATE MAZE");
-		button.position(90 + trans_canv_rt_amt, middle_pos_y + 110 + trans_canv_lt_amt);
-		button.size(400, 100);
-		button.style('background-color', color(0, 255, 0));
-		button.style('font-size', '40px');
-		button.mousePressed(log_user_input);
-	}
+    user_input_y_dim = createInput();
+    user_input_y_dim.position(inputOffsetX, inputOffsetY + 15 + 60);
+    user_input_y_dim.style('background-color', 'magenta');
+    user_input_y_dim.size(50, 20);
+
+    user_input_z_dim = createInput();
+    user_input_z_dim.position(inputOffsetX, inputOffsetY + 15 + 90);
+    user_input_z_dim.style('background-color', 'magenta');
+    user_input_z_dim.size(50, 20);
+
+    //generate maze button
+    button = createButton("GENERATE MAZE");
+    button.position(canvasX + width / 2 - 220, canvasY + 190); 
+    button.style('background-color', 'lime');
+    button.size(400, 100);
+    button.style('font-size', '40px');
+    button.mousePressed(log_user_input);
+  }
 
 	//build_all_maze_perspectives called from log_user_input function that validates the input if info not taken from file
 	if(maze_info_from_file){

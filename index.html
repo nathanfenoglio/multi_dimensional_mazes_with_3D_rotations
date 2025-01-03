@@ -5,19 +5,43 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Multidimensional Rotational Mazes</title>
 		<script src="libraries/p5.js"></script>
-		<!-- <script src="libraries/p5.sound.js"></script> -->
 		<script src="./mazes/maze_info_11_11_11_1_5_22_22.js"></script>
 		<script src="sketch.js"></script>
-		<style>
-			body {
-				margin: 0;
-				padding: 0;
-				
+    <style>
+      /* styles to center canvas on screen */
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      h1 {
+        margin-top: 10px; 
+        text-align: center;
+        color: white;
+      }
+      a {
+				display: block; 
+				margin-bottom: 10px; /* Adds space between the canvas and the link */
+				text-align: center;
+				font-size: 24px; /* Larger font size */
+				color: aqua; /* Link color */
+				text-decoration: none; /* Removes underline */
 			}
-			canvas {
-				margin: auto;
+			a:hover {
+				color: yellow; /* Change color on hover */
 			}
-		</style>
-	</head>
-	<body style="background-color: black;"></body>
+    </style>
+  </head>
+  <body>
+    <!-- canvas.parent('container'); in sketch.js to associate canvas with div -->
+    <div id="container">
+      <h1>Multidimensional Rotational Mazes</h1>
+      <a href="https://nathan-fenoglio.com" target="_blank">nathan-fenoglio.com</a>
+    </div>
+  </body>
 </html>
