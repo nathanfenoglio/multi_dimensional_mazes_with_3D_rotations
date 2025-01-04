@@ -901,6 +901,25 @@ function build_all_maze_perspectives(){
 	current_maze_plane = Math.floor(start_index / (orig_cols * orig_rows));
 }
 
+function windowResized() {
+  //calculate center position of the canvas
+  let canvasX = (windowWidth - width) / 2;
+  let canvasY = (windowHeight - height) / 2;
+
+  //offset for input elements inside the canvas
+  let inputOffsetY = canvasY + 45; 
+  let inputOffsetX = canvasX + 430;
+
+  //reposition input elements and button based on new window size
+  if (!maze_info_from_file) {
+    user_input_x_dim.position(inputOffsetX, inputOffsetY + 45);
+    user_input_y_dim.position(inputOffsetX, inputOffsetY + 75);
+    user_input_z_dim.position(inputOffsetX, inputOffsetY + 105);
+    button.position(canvasX + width / 2 - 220, canvasY + 190); 
+  }
+
+}
+
 function setup() {
   let canvas = createCanvas(650, 650);
   //container is the id of the div element in index.html 
@@ -921,17 +940,17 @@ function setup() {
   if (!maze_info_from_file) {
     //maze dimensions x, y, z input fields
     user_input_x_dim = createInput();
-    user_input_x_dim.position(inputOffsetX, inputOffsetY + 15 + 30);
+    user_input_x_dim.position(inputOffsetX, inputOffsetY + 45);
     user_input_x_dim.style('background-color', 'magenta');
     user_input_x_dim.size(50, 20);
 
     user_input_y_dim = createInput();
-    user_input_y_dim.position(inputOffsetX, inputOffsetY + 15 + 60);
+    user_input_y_dim.position(inputOffsetX, inputOffsetY + 75);
     user_input_y_dim.style('background-color', 'magenta');
     user_input_y_dim.size(50, 20);
 
     user_input_z_dim = createInput();
-    user_input_z_dim.position(inputOffsetX, inputOffsetY + 15 + 90);
+    user_input_z_dim.position(inputOffsetX, inputOffsetY + 105);
     user_input_z_dim.style('background-color', 'magenta');
     user_input_z_dim.size(50, 20);
 
